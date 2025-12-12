@@ -11,9 +11,7 @@ const AllPlaces = ({ places }) => {
                 <>
                   <img
                     className="w-full h-52 md:h-72 object-cover transition-transform duration-500 group-hover:scale-110"
-                    src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${
-                      place.photos?.[0]
-                    }`}
+                    src={`http://localhost:3000/uploads/${place.photos?.[0]}`}
                     alt={place.title}
                   />
                 </>

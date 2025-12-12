@@ -70,7 +70,7 @@ const PhotosUploader = ({ addedPhotos, onChange }) => {
             <div className="h-32 flex relative" key={link}>
               <img
                 className="rounded-2xl w-full object-cover"
-                src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${link}`}
+                src={`http://localhost:3000/uploads/${link}`}
                 alt=""
               />
               <button
