@@ -30,10 +30,10 @@ const PlaceGallery = ({ place }) => {
           </div>
           {place?.photos?.length > 0 &&
             place.photos.map((photo) => (
-              <div>
+              <div key={photo}>
                 <img
                   className="w-full"
-                  src={`http://localhost:3000/uploads/${photo}`}
+                  src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${photo}`}
                 />
               </div>
             ))}
@@ -49,7 +49,9 @@ const PlaceGallery = ({ place }) => {
             <div>
               <img
                 onClick={() => setShowAllPhotos(true)}
-                src={`http://localhost:3000/uploads/${place.photos[0]}`}
+                src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${
+                  place.photos[0]
+                }`}
                 className="aspect-square object-cover w-full cursor-pointer"
               />
             </div>
@@ -59,7 +61,9 @@ const PlaceGallery = ({ place }) => {
           {place.photos?.[1] && (
             <img
               onClick={() => setShowAllPhotos(true)}
-              src={`http://localhost:3000/uploads/${place.photos[1]}`}
+              src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${
+                place.photos[1]
+              }`}
               className="aspect-square object-cover w-full cursor-pointer"
             />
           )}
@@ -67,7 +71,9 @@ const PlaceGallery = ({ place }) => {
             {place.photos?.[2] && (
               <img
                 onClick={() => setShowAllPhotos(true)}
-                src={`http://localhost:3000/uploads/${place.photos[2]}`}
+                src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${
+                  place.photos[2]
+                }`}
                 className="aspect-square object-cover w-full cursor-pointer relative top-2"
               />
             )}
