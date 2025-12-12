@@ -4,7 +4,7 @@ const Image = ({ place, index = 0, className = null }) => {
   return (
     <img
       className={className}
-      src={"http://localhost:3000/uploads/" + place.photos[index]}
+      src={`${import.meta.env.VITE_BACKEND_URL}/uploads/${place.photos[index]}`}
       alt=""
     />
   );
