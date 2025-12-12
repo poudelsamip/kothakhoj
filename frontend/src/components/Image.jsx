@@ -4,7 +4,7 @@ const Image = ({ place, index = 0, className = null }) => {
   return (
     <img
       className={className}
-      src={"http://localhost:3000/uploads/" + place.photos[index]}
+      src={"https://kothakhoj-backend.onrender.com/uploads/" + place.photos[index]}
       alt=""
     />
   );
