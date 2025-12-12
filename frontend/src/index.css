@@ -1,0 +1,31 @@
+@import url("https://fonts.googleapis.com/css2?family=BBH+Bogle&family=Outfit:wght@100..900&display=swap");
+@import "tailwindcss";
+
+@theme {
+  --color-primary: #265cc7;
+}
+
+input[type="text"],
+input[type="password"],
+input[type="email"],
+input[type="number"],
+input[type="tel"],
+textarea {
+  @apply w-full border border-gray-300 my-2 py-2 px-3 rounded-2xl;
+}
+
+button {
+  @apply cursor-pointer;
+}
+
+button.primary {
+  background-color: "#265CC7";
+  @apply bg-primary p-2 w-full text-white rounded-2xl;
+}
+
+h1,
+h2,
+h3,
+.logo {
+  font-family: "Outfit", sans-serif;
+}
