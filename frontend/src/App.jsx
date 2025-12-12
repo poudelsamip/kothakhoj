@@ -15,7 +15,7 @@ import BookingsPage from "./pages/BookingsPage";
 import SearchedPlace from "./pages/SearchedPlaces";
 import BookedListings from "./pages/BookedListings";
 
-axios.defaults.baseURL = "http://localhost:3000";
+axios.defaults.baseURL = "https://kothakhoj-backend.onrender.com";
 axios.defaults.withCredentials = true;
 
 function App() {
