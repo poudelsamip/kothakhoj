@@ -9,15 +9,20 @@ import AccountNav from "../components/AccountNav";
 const AccountPage = () => {
   const [redirect, setRedirect] = useState(null);
   const { user, setUser, ready } = useContext(UserContext);
+
+  const [loading, setLoading] = useState(false);
+
   let { subpage } = useParams();
   if (subpage === undefined) {
     subpage = "profile";
   }
 
   const logout = async () => {
+    setLoading(true);
     await axios.post("/logout");
     setRedirect("/");
     setUser(null);
+    setLoading(false);
   };
 
   if (!ready) return "loading...";
@@ -32,8 +37,13 @@ const AccountPage = () => {
       {subpage === "profile" && (
         <div className="text-center max-w-lg min-h-screen mx-auto">
           Logged in as {user.name} ({user.email}) <br />
-          <button onClick={logout} className="primary max-w-sm mt-2">
-            Logout
+          <button
+            onClick={logout}
+            className={`primary max-w-sm mt-2 ${
+              loading ? "cursor-not-allowed!" : ""
+            }`}
+          >
+            {!loading ? "Logout" : "logging out ..."}
           </button>
         </div>
       )}

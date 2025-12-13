@@ -7,8 +7,11 @@ const RegisterPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
 
+  const [loading, setLoading] = useState(false);
+
   const registerUser = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       await axios.post("/register", {
         name,
@@ -19,6 +22,7 @@ const RegisterPage = () => {
     } catch (error) {
       alert("Registratin failed");
     }
+    setLoading(false);
   };
 
   return (
@@ -44,7 +48,9 @@ const RegisterPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="primary">Register</button>
+          <button className={`primary ${loading && "cursor-not-allowed!"}`}>
+            {!loading ? "Register" : "creating account ..."}
+          </button>
           <div className="text-center py-2 text-gray-500">
             Alreay have an account ?{" "}
             <Link className="underline text-black" to={"/login"}>

@@ -9,18 +9,21 @@ const LoginPage = () => {
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
 
+  const [loading, setLoading] = useState(false);
+
   const { setUser } = useContext(UserContext);
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    setLoading(true);
     try {
       const { data } = await axios.post("/login", { email, password });
       setUser(data);
-      alert("Login successfull");
       setRedirect(true);
     } catch (error) {
       alert("Login failed");
     }
+    setLoading(false);
   };
 
   if (redirect) {
@@ -44,7 +47,9 @@ const LoginPage = () => {
             value={password}
             onChange={(e) => setPassword(e.target.value)}
           />
-          <button className="primary">Login</button>
+          <button className={`primary ${loading ? "cursor-not-allowed!" : ""}`}>
+            {!loading ? "Login" : "logging in ..."}
+          </button>
           <div className="text-center py-2 text-gray-500">
             Don't have an account ?{" "}
             <Link className="underline text-black" to={"/register"}>
