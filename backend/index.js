@@ -13,13 +13,13 @@ import path from "path";
 import { fileURLToPath } from "url";
 import multer from "multer";
 import fs from "fs";
+dotenv.config();
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
 const port = process.env.PORT || 3000;
 
-dotenv.config();
 const app = express();
 
 const jwtsecret = process.env.JWT_SECRET;
@@ -30,12 +30,24 @@ app.use("/uploads", express.static(__dirname + "/uploads/"));
 // app.use(cors());
 
 const frontendUrl = process.env.FRONTEND_URL;
+const allowedOrigins = [frontendUrl, "http://localhost:5173"];
+
 app.use(
   cors({
-    origin: frontendUrl,
+    origin: function (origin, callback) {
+      if (!origin) return callback(null, true); //for postman
+
+      if (allowedOrigins.includes(origin)) {
+        callback(null, true);
+      } else {
+        callback(new Error("Not allowed by CORS"));
+      }
+    },
     credentials: true,
   })
 );
+
+app.options("*", cors());
 
 // made this fucntion later so its not used everywhere
 function getUserDataFromCookies(token) {
@@ -83,7 +95,13 @@ app.post("/login", async (req, res) => {
           {},
           (error, token) => {
             if (error) throw error;
-            res.cookie("token", token).json(userDoc);
+            res
+              .cookie("token", token, {
+                httpOnly: true,
+                secure: true,
+                sameSite: "none",
+              })
+              .json(userDoc);
           }
         );
       } else {
@@ -111,7 +129,9 @@ app.get("/profile", async (req, res) => {
 });
 
 app.post("/logout", (req, res) => {
-  res.cookie("token", "").json(true);
+  res
+    .cookie("token", "", { httpOnly: true, secure: true, sameSite: "none" })
+    .json(true);
 });
 
 app.post("/upload-by-link", async (req, res) => {
