@@ -47,8 +47,6 @@ app.use(
   })
 );
 
-app.options("*", cors());
-
 // made this fucntion later so its not used everywhere
 function getUserDataFromCookies(token) {
   return new Promise((resolve, reject) => {
