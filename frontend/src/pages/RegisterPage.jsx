@@ -17,6 +17,10 @@ const RegisterPage = () => {
       return;
     }
     setLoading(true);
+    if(!name || !password || !email){
+      setError("Enter all fields");
+      setLoading(false);
+      return;
     try {
       await axios.post("/register", {
         name,

@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const [error, setError] = useState(null);
+  const [error, setError] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
@@ -21,6 +21,11 @@ const LoginPage = () => {
       return;
     }
     setLoading(true);
+    if (!name || !password) {
+      setError("Enter credentials");
+      setLoading(false);
+      return;
+    }
     try {
       const { data } = await axios.post("/login", { email, password });
       setUser(data);
