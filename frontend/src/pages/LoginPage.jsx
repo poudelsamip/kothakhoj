@@ -8,7 +8,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const [loading, setLoading] = useState(false);
 
@@ -16,12 +16,8 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
-    if (!email || !password) {
-      setError("Enter Credentials");
-      return;
-    }
     setLoading(true);
-    if (!name || !password) {
+    if (!email || !password) {
       setError("Enter credentials");
       setLoading(false);
       return;
