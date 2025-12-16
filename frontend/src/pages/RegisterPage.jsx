@@ -6,11 +6,16 @@ const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
+  const [error, setError] = useState(false);
 
   const [loading, setLoading] = useState(false);
 
   const registerUser = async (e) => {
     e.preventDefault();
+    if (!name || !email || !password) {
+      setError("Enter all fields");
+      return;
+    }
     setLoading(true);
     try {
       await axios.post("/register", {
@@ -29,6 +34,7 @@ const RegisterPage = () => {
     <div className="mt-4 grow flex items-center justify-around">
       <div className="mb-64">
         <h1 className="text-4xl text-center mb-4">Register</h1>
+        {error && <p className="text-red-500">{error}</p>}
         <form className="max-w-sm mx-auto" onSubmit={registerUser}>
           <input
             type="text"

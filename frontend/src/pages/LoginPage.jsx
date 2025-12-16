@@ -8,6 +8,7 @@ const LoginPage = () => {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [redirect, setRedirect] = useState(false);
+  const [error, setError] = useState(null);
 
   const [loading, setLoading] = useState(false);
 
@@ -15,6 +16,10 @@ const LoginPage = () => {
 
   const handleLogin = async (e) => {
     e.preventDefault();
+    if (!email || !password) {
+      setError("Enter Credentials");
+      return;
+    }
     setLoading(true);
     try {
       const { data } = await axios.post("/login", { email, password });
@@ -34,6 +39,7 @@ const LoginPage = () => {
     <div className="mt-4 grow flex items-center justify-around">
       <div className="mb-64">
         <h1 className="text-4xl text-center mb-4">Login</h1>
+        {error && <p className="text-red-500">{error}</p>}
         <form className="max-w-sm mx-auto" onSubmit={handleLogin}>
           <input
             type="email"

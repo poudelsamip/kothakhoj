@@ -1,6 +1,9 @@
 import { Link } from "react-router-dom";
 
-const AllPlaces = ({ places }) => {
+const AllPlaces = ({ places, loading=false }) => {
+  if(loading) return <div className="min-h-screen w-full text-center w-full">
+      <p className="mt-10 text-gray-500 font-semibold">loading... please wait</p>
+    </div>
   return (
     <div className="mt-8 gap-6 grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
       {places.length > 0 &&
