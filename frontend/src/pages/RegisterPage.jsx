@@ -6,21 +6,18 @@ const RegisterPage = () => {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
-  const [error, setError] = useState(false);
+  const [error, setError] = useState("");
 
   const [loading, setLoading] = useState(false);
 
   const registerUser = async (e) => {
     e.preventDefault();
-    if (!name || !email || !password) {
-      setError("Enter all fields");
-      return;
-    }
     setLoading(true);
-    if(!name || !password || !email){
+    if (!name || !password || !email) {
       setError("Enter all fields");
       setLoading(false);
       return;
+    }
     try {
       await axios.post("/register", {
         name,
